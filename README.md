@@ -1,4 +1,4 @@
-# Tim5
+# Team5
 Travel Activity Tracker Application
 
 Članovi tima:
