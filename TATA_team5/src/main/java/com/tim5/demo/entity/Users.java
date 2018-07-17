@@ -29,6 +29,14 @@ public class Users
     Double longitude;
     Double latitude;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "users")
+    private Set<Hotel> hotels = new HashSet<>();
+
     public String getName()
     {
         return name;
@@ -106,13 +114,5 @@ public class Users
     public void setHotels(Set<Hotel> hotels) {
         this.hotels = hotels;
     }
-
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "users")
-    private Set<Hotel> hotels = new HashSet<>();
 
 }
