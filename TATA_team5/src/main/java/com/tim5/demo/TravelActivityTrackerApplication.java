@@ -1,5 +1,7 @@
 package com.tim5.demo;
 
+import com.tim5.demo.repository.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
