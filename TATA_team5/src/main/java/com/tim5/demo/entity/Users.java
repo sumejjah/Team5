@@ -1,9 +1,8 @@
 package com.tim5.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Users
@@ -100,5 +99,20 @@ public class Users
     }
 
 
+    public Set<Hotel> getHotels() {
+        return hotels;
+    }
+
+    public void setHotels(Set<Hotel> hotels) {
+        this.hotels = hotels;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "users")
+    private Set<Hotel> hotels = new HashSet<>();
 
 }
