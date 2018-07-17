@@ -3,7 +3,6 @@ package com.tim5.demo.entity;
 import javax.annotation.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.*;
-
 @Entity
 public class Hotel
 {
@@ -47,13 +46,5 @@ public class Hotel
     String name;
     Double longitude;
     Double latitude;
-
-    /*@ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "Users_Hotel",
-            joinColumns = {@JoinColumn(name = "hotel_id")},
-            inverseJoinColumns = {@JoinColumn(name = "users_id")}
-    )*/
-
 
 }
