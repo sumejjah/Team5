@@ -11,46 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <style>
-        /* The sidebar menu */
-        .sidenav {
-            height: 100%; /* Full-height: remove this if you want "auto" height */
-            width: 240px; /* Set the width of the sidebar */
-            position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-            z-index: 1; /* Stay on top */
-            top: 0; /* Stay at the top */
-            left: 0;
-            background-color: #cce5ff; /* Black */
-            overflow-x: hidden; /* Disable horizontal scroll */
-            padding-top: 100px;
-        }
 
-        /* The navigation menu links */
-        .sidenav a {
-            padding: 6px 8px 6px 16px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-        }
-
-        /* When you mouse over the navigation links, change their color */
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        /* Style page content */
-        .main {
-            margin-left: 160px; /* Same as the width of the sidebar */
-            padding: 0px 10px;
-        }
-
-        /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-        @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 15px;}
-            .sidenav a {font-size: 18px;}
-        }
-    </style>
 
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
     <link rel="stylesheet" href="assets/css/fancybox/jquery.fancybox.css">
@@ -59,6 +20,11 @@
     <link rel="stylesheet" href="assets/css/slippry.css">
     <link href="assets/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/color/default.css">
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
 
 
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
@@ -97,14 +63,36 @@
 
 <div class="container">
 
-    <div class="row">
+    <div class="row" style="position: absolute;">
         <div class="col-*-*">
-            <div class="sidenav">
-                <a href="#" id="hotel1" onclick="getRoute(0,0,1,1)" >Hotel 1</a>
-                <a href="#" id="hotel2">Hotel 2</a>
-                <a href="#" id="hotel3">Hotel 3</a>
-                <a href="#" id="hotel4">Hotel 4</a>
-            </div>
+            <nav class="navbar-default navbar-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="main-menu">
+                        
+                        <li class="active-link">
+                            <a href="index.html" ><i class="fa fa-desktop "></i>Dashboard <span class="badge">Included</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-qrcode "></i>My Link One</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o"></i>My Link Two</a>
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-edit "></i>My Link Three </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table "></i>My Link Four</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-edit "></i>My Link Five </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </nav>
         </div>
         <div class="col-*-12">
             <h4>Route to your desired location</h4>

@@ -59,14 +59,14 @@ a:focus {
 	outline: none !important;
 }
 
-a:hover {
-	text-decoration: none;
-  color: #6a7dfe;
-  color: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-  color: -o-linear-gradient(left, #21d4fd, #b721ff);
-  color: -moz-linear-gradient(left, #21d4fd, #b721ff);
-  color: linear-gradient(left, #21d4fd, #b721ff);
-}
+/*a:hover {*/
+	/*text-decoration: none;*/
+  /*color: #6a7dfe;*/
+  /*color: -webkit-linear-gradient(left, #21d4fd, #b721ff);*/
+  /*color: -o-linear-gradient(left, #21d4fd, #b721ff);*/
+  /*color: -moz-linear-gradient(left, #21d4fd, #b721ff);*/
+  /*color: linear-gradient(left, #21d4fd, #b721ff);*/
+/*}*/
 
 /*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
@@ -325,21 +325,6 @@ iframe {
   transition: all 0.4s;
 }
 
-.btn-show-pass:hover {
-  color: #6a7dfe;
-  color: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-  color: -o-linear-gradient(left, #21d4fd, #b721ff);
-  color: -moz-linear-gradient(left, #21d4fd, #b721ff);
-  color: linear-gradient(left, #21d4fd, #b721ff);
-}
-
-.btn-show-pass.active {
-  color: #6a7dfe;
-  color: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-  color: -o-linear-gradient(left, #21d4fd, #b721ff);
-  color: -moz-linear-gradient(left, #21d4fd, #b721ff);
-  color: linear-gradient(left, #21d4fd, #b721ff);
-}
 
 
 
@@ -412,7 +397,7 @@ iframe {
   left: 0;
 }
 
-}
+
 /*------------------------------------------------------------------
 [ Responsive ]*/
 

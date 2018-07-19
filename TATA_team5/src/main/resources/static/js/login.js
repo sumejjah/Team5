@@ -7,6 +7,14 @@ function validate(){
         alert ("Login successfully");
         window.location = "userProfile.html"; // Redirecting to other page.
         return false;
+    }else if ( username == "admin" && password == "admin"){
+        alert ("Login successfully");
+        window.location = "adminProfile.html"; // Redirecting to other page.
+        return false;
+    } else if ( username == "supervisor" && password == "supervisor"){
+        alert ("Login successfully");
+        window.location = "adminProfile.html"; // Redirecting to other page.
+        return false;
     }
     else{
         attempt --;// Decrementing by one.
