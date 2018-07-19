@@ -7,5 +7,5 @@ var map = new mapboxgl.Map({
     zoom: 15
 });
 map.on('load', function() {
-    getRoute(center[0], center[1], center[0]+0.001, center[1]+0.02);
+    getRoute(18.41, 43.85, 18.43, 43.82);
 });
