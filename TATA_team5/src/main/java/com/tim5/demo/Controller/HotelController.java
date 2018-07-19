@@ -7,12 +7,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,12 +26,12 @@ public class HotelController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
 
-    public ResponseEntity<Collection<Hotel>> findAll(){
-        Collection<Hotel> hotel=this.hotelRepository.findAll();
-        if(hotel.isEmpty()){
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<Collection<Hotel>>(hotel,HttpStatus.OK);
+    public String findAll(Model model){
+        List<Hotel> hotels = (List<Hotel>) this.hotelRepository.findAll();
+
+        model.addAttribute("hotelsList", hotels);
+
+        return "showHotels";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{hotelId}")
@@ -62,31 +64,31 @@ public class HotelController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
-    //UPDATE HOTEL
-    /*@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateHotel(@PathVariable long id,@RequestBody Hotel hotel) {
-
-        Optional<Hotel> hotelOptional = hotelRepository.findById(id);
-
-        if (!hotelOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
+    //UPDATE
+    @RequestMapping(value={"/hotelEdit","/hotelEdit/{id}"}, method = RequestMethod.GET)
+    public String notesEditForm(Model model, @PathVariable(required = false, name = "id") Long id) {
+        if (null != id) {
+            model.addAttribute("hotelDetail",(Optional<Hotel>) hotelRepository.findById(id));
+        } else {
+            model.addAttribute("hotelDetail", new Hotel());
         }
-
-        hotel.setId(id);
-
+        return "editHotel";
+    }
+    //@RequestMapping(value="/notesEdit", method = RequestMethod.POST)
+    @RequestMapping(value="/hotelEdit", method = RequestMethod.POST)
+    //public String notesEdit(Model model, Hotel notes) {
+    public String hotelEdit(Model model, Hotel hotel) {
+        //hotelRepository.save(notes);
         hotelRepository.save(hotel);
-        return new ResponseEntity().NoContent().build();
-    }*/
+        model.addAttribute("hotelList",(List<Hotel>) hotelRepository.findAll());
+        return "redirect:all";
+    }
 
     //DELETE ONE
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteHotel(@PathVariable("id") long id) {
-
-        Optional<Hotel> hotel = hotelRepository.findById(id);
-        if (!hotel.isPresent()) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
+    @RequestMapping(value="/hotelDelete/{id}", method = RequestMethod.GET)
+    public String hotelDelete(Model model, @PathVariable(required = true, name = "id") Long id) {
         hotelRepository.deleteById(id);
-        return new ResponseEntity<Hotel>(HttpStatus.NO_CONTENT);
+        model.addAttribute("hotelsList", hotelRepository.findAll());
+        return "redirect:/hotel/all";
     }
 }
