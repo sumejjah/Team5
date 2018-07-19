@@ -23,9 +23,8 @@ public class HotelController {
     //all,add,delete,update
     @Autowired
     private HotelRepository hotelRepository;
-
+    //ALL HOTELS
     @RequestMapping(method = RequestMethod.GET, value = "/all")
-
     public String findAll(Model model){
         List<Hotel> hotels = (List<Hotel>) this.hotelRepository.findAll();
 
@@ -33,7 +32,6 @@ public class HotelController {
 
         return "showHotels";
     }
-
     @RequestMapping(method = RequestMethod.GET, value = "/{hotelId}")
     ResponseEntity<?> getHotel (@PathVariable Long hotelId) {
 
@@ -43,28 +41,22 @@ public class HotelController {
         }
         return new ResponseEntity<Optional<Hotel>>(hotel, HttpStatus.OK);
     }
-    //CREATE NEW HOTEL
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> createHotel( @RequestBody Hotel hotel, UriComponentsBuilder ucBuilder) {
 
-        Collection<Hotel> hotels = this.hotelRepository.findAll();
-        boolean exists = false;
-        for (Iterator<Hotel> i = hotels.iterator(); i.hasNext();) {
-            if(i.next().getName().equals(hotel.getName()))
-                exists = true;
-        }
-
-        if (exists) {
-            return new ResponseEntity(HttpStatus.CONFLICT);
-        }
-        hotelRepository.save(hotel);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/hotels/{id}").buildAndExpand(hotel.getId()).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    //CREATE NEW USER
+    @RequestMapping(path = "/addHotel", method = RequestMethod.GET)
+    public String createProduct(Model model) {
+        model.addAttribute("hotelDetail", new Hotel());
+        return "addHotel";
+    }
+    @RequestMapping(path = "/addHotelNew", method = RequestMethod.POST)
+    public String addNewHotel(Model model, Hotel hotel) {
+        model.addAttribute("hotelDetail", new Hotel());
+        hotelRepository.save(new Hotel(hotel.getName(), hotel.getLongitude(), hotel.getLatitude()));
+        model.addAttribute("hotelsList",(List<Hotel>) hotelRepository.findAll());
+        return "showHotels";
     }
 
-    //UPDATE
+    //EDIT HOTEL
     @RequestMapping(value={"/hotelEdit","/hotelEdit/{id}"}, method = RequestMethod.GET)
     public String notesEditForm(Model model, @PathVariable(required = false, name = "id") Long id) {
         if (null != id) {
@@ -74,17 +66,14 @@ public class HotelController {
         }
         return "editHotel";
     }
-    //@RequestMapping(value="/notesEdit", method = RequestMethod.POST)
     @RequestMapping(value="/hotelEdit", method = RequestMethod.POST)
-    //public String notesEdit(Model model, Hotel notes) {
     public String hotelEdit(Model model, Hotel hotel) {
-        //hotelRepository.save(notes);
         hotelRepository.save(hotel);
         model.addAttribute("hotelList",(List<Hotel>) hotelRepository.findAll());
         return "redirect:all";
     }
 
-    //DELETE ONE
+    //DELETE ONE HOTEL
     @RequestMapping(value="/hotelDelete/{id}", method = RequestMethod.GET)
     public String hotelDelete(Model model, @PathVariable(required = true, name = "id") Long id) {
         hotelRepository.deleteById(id);

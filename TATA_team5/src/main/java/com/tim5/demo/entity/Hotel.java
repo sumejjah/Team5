@@ -14,6 +14,15 @@ public class Hotel
         this.id = id;
     }
 
+    public Hotel(String name, Double longitude, Double latitude) {
+        this.name = name;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
+    public Hotel() {
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "hotel_id")
