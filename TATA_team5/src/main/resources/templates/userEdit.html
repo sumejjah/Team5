@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Notes</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+
+    <h1>User</h1>
+
+    <form class="form-group" action="/users/userEdit" th:action="@{/users/userEdit}" method="post">
+        <input th:type="hidden" name="id" th:field="${usrDetails.id}"/>
+        <div class="form-group">
+            <label for="title">Name</label>
+            <input type="text" class="form-control" id="title" th:field="${usrDetails.name}" />
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname</label>
+            <textarea class="form-control" id="surname" th:field="${usrDetails.surname}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="userName">Username</label>
+            <textarea class="form-control" id="userName" th:field="${usrDetails.userName}"></textarea>
+        </div>
+        <input th:type="hidden" name="id" th:field="${usrDetails.password}" />
+        <div class="form-group">
+            <label for="email">Email</label>
+            <textarea class="form-control" id="email" th:field="${usrDetails.email}"></textarea>
+        </div>
+        <input th:type="hidden" name="id" th:field="${usrDetails.role}" />
+        <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <textarea class="form-control" id="longitude" th:field="${usrDetails.longitude}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <textarea class="form-control" id="latitude" th:field="${usrDetails.latitude}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-default"><a th:href="@{/users/showUsers}">Cancel</a></button>
+    </form>
+
+</div>
+
+</body>
+</html>

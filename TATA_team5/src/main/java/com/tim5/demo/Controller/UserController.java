@@ -2,37 +2,31 @@ package com.tim5.demo.Controller;
 
 import com.tim5.demo.entity.Users;
 import com.tim5.demo.repository.UsersRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
     //all, add, delete, update
     @Autowired
     private UsersRepository usersRepository;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public ResponseEntity<Collection<Users>> findAll(){
+    @RequestMapping(method = RequestMethod.GET, value = "/showUsers")
+    public String findAllNew(Model model){
 
-        Collection<Users> users = this.usersRepository.findAll();
+        List<Users> users = (List<Users>) this.usersRepository.findAll();
 
-        if(users.isEmpty()){
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }
+        model.addAttribute("usrList", users);
 
-
-        return new ResponseEntity<Collection<Users>>(users, HttpStatus.OK);
+        return "showUsers";
     }
 
     // RETRIEVE ONE USER
@@ -47,58 +41,45 @@ public class UserController {
     }
 
     //CREATE NEW USER
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> createUser(@RequestBody Users user, UriComponentsBuilder ucBuilder) {
+    @RequestMapping(path = "/userAdd", method = RequestMethod.GET)
+    public String createProduct(Model model) {
+        model.addAttribute("usrDetails", new Users());
 
-        Collection<Users>  users = this.usersRepository.findAll();
-        boolean exists = false;
-        for (Iterator<Users> i = users.iterator(); i.hasNext();) {
-            if(i.next().getName().equals(user.getName()))
-                exists = true;
-        }
+        return "userAdd";
+    }
 
-        if (exists) {
-            return new ResponseEntity(HttpStatus.CONFLICT);
-        }
-        usersRepository.save(user);
+    @RequestMapping(path = "/userAddNew", method = RequestMethod.POST)
+    public String addNewUser(Model model, Users user) {
+        model.addAttribute("usrDetails", new Users());
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        usersRepository.save(new Users(user.getName(), user.getSurname(), user.getUserName(), user.getPassword(), user.getEmail(), user.getRole(), user.getLongitude(), user.getLatitude()));
+        model.addAttribute("usrList",(List<Users>) usersRepository.findAll());
+        return "showUsers";
     }
 
     //UPDATE
-    /*@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Object> updateUser(@RequestBody Users user, @PathVariable long id) {
-
-        Optional<Users> userOptional = usersRepository.findById(id);
-
-        if (!userOptional.isPresent())
-            return ResponseEntity.notFound().build();
-
-        user.setId(id);
-
-        usersRepository.save(user);
-
-        return new ResponseEntity().noContent().build();
-    }*/
-
-    //DELETE ONE USER
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteUser(@PathVariable("id") long id) {
-
-        Optional<Users> user = usersRepository.findById(id);
-        if (!user.isPresent()) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+    @RequestMapping(value={"/userEdit","/userEdit/{id}"}, method = RequestMethod.GET)
+    public String notesEditForm(Model model, @PathVariable(required = false, name = "id") Long id) {
+        if (null != id) {
+            model.addAttribute("usrDetails",(Optional<Users>) usersRepository.findById(id));
+        } else {
+            model.addAttribute("usrDetails", new Users());
         }
-
-        usersRepository.deleteById(id);
-
-        return new ResponseEntity<Users>(HttpStatus.NO_CONTENT);
+        return "userEdit";
     }
 
+    @RequestMapping(value="/userEdit", method = RequestMethod.POST)
+    public String notesEdit(Model model, Users user) {
+        usersRepository.save(user);
+        model.addAttribute("usrList",(List<Users>) usersRepository.findAll());
+        return "redirect:showUsers";
+    }
 
-
-
-
+    //DELETE ONE USER
+    @RequestMapping(value="/userDelete/{id}", method = RequestMethod.GET)
+    public String userDelete(Model model, @PathVariable(required = true, name = "id") Long id) {
+        usersRepository.deleteById(id);
+        model.addAttribute("usrList",(List<Users>) usersRepository.findAll());
+        return "redirect:/users/showUsers";
+    }
 }

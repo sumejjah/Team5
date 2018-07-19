@@ -18,6 +18,20 @@ public class Users
     @Column(name = "users_id")
     private Long id;
 
+
+    public Users() {
+    }
+
+    public Users(String name, String surname, String userName, String password, String email, String role, Double longitude, Double latitude) {
+        this.name = name;
+        this.surname = surname;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
     String name;
     String surname;
     String userName;
