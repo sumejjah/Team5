@@ -13,13 +13,51 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
 </head>
 <body>
 <div class="container">
-    <h2>Users list</h2>
-    <button type="button" class="btn btn-link"><a th:href="@{/users/userAdd}">
-        <span class="glyphicon glyphicon-pencil"></span>
-    </a></button>
+    <h2>Users</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">All users</div>
+        <div class="panel-body">
+            <span th:each ="users : ${usrList}">
+              <span href="#" class="list-group-item">
+                <div class="panel-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-2 col-lg-2">
+                                <p class="text-right">Name: </p>
+                                <p class="text-right">Surname: </p>
+                                <p class="text-right">Username: </p>
+                                <p class="text-right">Email: </p>
+                                <p class="text-right">Longitude: </p>
+                                <p class="text-right">Latitude: </p>
+                            </div>
+                            <div class="col-sm-9 col-md-10 col-lg-10">
+                                <p><span th:utext="${users.name}"></span></p>
+                                <p><span th:utext="${users.surname}"></span></p>
+                                <p><span th:utext="${users.userName}"></span></p>
+                                <p><span th:utext="${users.email}"></span></p>
+                                <p><span th:utext="${users.longitude}"></span></p>
+                                <p><span th:utext="${users.latitude}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{/users/userDelete/__${users.id}__}"><span class="glyphicon glyphicon-remove btn pull-right" style="font-size: x-large;"></span></a>
+                    <a th:href="@{/users/userEdit/__${users.id}__}"><span class="glyphicon glyphicon-pencil btn pull-right" style="font-size: x-large;"></span></a>
+
+                </div>
+              </span>
+             </span>
+        </div>
+    </div>
+    <div style="background-color: #33ccff">
+        <h2><button data-toggle="tooltip" data-placement="down" title="Add new user" type="button" class="btn btn-link pull-right center-block" ><a th:href="@{/users/userAdd}" href="#"><span class="glyphicon glyphicon-plus" style="font-size: x-large"></span></a></button></h2>
+    </div>
+</div>
+<!--
+<div class="container">
     <div class="table-responsive">
         <table class="table table-striped">
             <tr>
@@ -57,5 +95,6 @@
     </div>
 
 </div>
+-->
 </body>
 </html>
