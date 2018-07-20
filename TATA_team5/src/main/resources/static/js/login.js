@@ -4,16 +4,16 @@ function validate(){
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     if ( username == "user" && password == "user"){
-        alert ("Login successfully");
+        alert ("Login successful");
         window.location = "userProfile.html"; // Redirecting to other page.
         return false;
     }else if ( username == "admin" && password == "admin"){
-        alert ("Login successfully");
+        alert ("Login successful");
         window.location = "adminProfile.html"; // Redirecting to other page.
         return false;
     } else if ( username == "supervisor" && password == "supervisor"){
-        alert ("Login successfully");
-        window.location = "adminProfile.html"; // Redirecting to other page.
+        alert ("Login successful");
+        window.location = "blank.html"; // Redirecting to other page.
         return false;
     }
     else{

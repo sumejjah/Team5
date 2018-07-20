@@ -114,6 +114,14 @@ min-height: 80px;
     color:#808080;
      text-decoration:none;
 }
+.imageiconhotel{
+    height: 70px;
+    width: 70px;
+}
+.imageiconedithotel{
+    height: 70px;
+    width: 90px;
+}
 /*==============================================
     FOOTER STYLES     
     =============================================*/
