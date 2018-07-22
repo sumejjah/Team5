@@ -59,15 +59,6 @@ public class UserController {
         return "showUsers";
     }
 
-    @RequestMapping(path = "/index", method = RequestMethod.GET)
-    public String firtsPage() {
-        return "index";
-    }
-
-    @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "loginPage";
-    }
     //UPDATE
     @RequestMapping(value={"/userEdit","/userEdit/{id}"}, method = RequestMethod.GET)
     public String notesEditForm(Model model, @PathVariable(required = false, name = "id") Long id) {

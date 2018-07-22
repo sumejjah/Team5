@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Employee List</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,97 +13,125 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <title>Admin Panel</title>
+    <link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+    <!-- BOOTSTRAP STYLES-->
+    <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link th:href="@{/assets/css/font-awesome.css}" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-<div class="container">
-    <div class="col-md-12">
-        <div class="col-md-6">
-            <h2>Hotels list</h2>
-        </div>
-        <div class="col-md-6">
-            <h2><button type="button" class="btn btn-link pull-right center-block" ><a th:href="@{/hotel/addHotel}" href="#"><span class="glyphicon glyphicon-plus"></span></a></button></h2>
+
+
+
+<div id="wrapper">
+    <div th:replace="adminProfile :: header"></div>
+    <!-- /. NAV TOP  -->
+
+
+    <nav class="navbar-default navbar-side" role="navigation" th:replace="adminProfile :: sidebarMenu"></nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Hotels</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <h2><button type="button" class="btn btn-link pull-right center-block" ><a th:href="@{/hotel/addHotel}" href="#"><span class="glyphicon glyphicon-plus"></span></a></button></h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <!--<table class="table table-striped">-->
+                        <table class="table table-cell">
+                            <thead class="thead-inverse" >
+                            <tr>
+                                <td><b>Id</b></td>
+                                <td><b>Name</b></td>
+                                <td><b>Longitude</b></td>
+                                <td><b>Latitude</b></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each ="hotel : ${hotelsList}">
+                                <td th:utext="${hotel.id}">...</td>
+                                <td th:utext="${hotel.name}">...</td>
+                                <td th:utext="${hotel.longitude}">...</td>
+                                <td th:utext="${hotel.latitude}">...</td>
+                                <!--<td><a th:href="@{/hotel/hotelEdit/__${hotel.id}__}">Edit</a> </td>-->
+                                <!--<td><button type="button" class="btn btn-link"><a th:href="@{/hotel/hotelEdit/__${hotel.id}__}">Edit</a></button>  </td>-->
+                                <td><button type="button" class="btn btn-link"><a href='#' th:href="@{/hotel/hotelEdit/__${hotel.id}__}"><span class="glyphicon glyphicon-pencil"></span></a></button></td>
+
+                                <!--<td data-toggle="modal" data-target="#myModal"><a th:href="@{/hotel//hotelDelete//__${hotel.id}__}">Delete</a></td>-->
+                                <td data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-link"><a href='#' th:href="@{/hotel//hotelDelete//__${hotel.id}__}"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+                                <!--           <td data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-link">Delete</button></td>
+                                           <div class="modal fade" id="myModal" role="dialog">
+                                               <div class="modal-dialog modal-lg">
+                                                   <div class="modal-content">
+                                                       <div class="modal-header">
+                                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                           <h4 class="modal-title">Delete hotel</h4>
+                                                       </div>
+                                                       <div class="modal-body">
+                                                           <p>Are you sure you want to delete the hotel?</p>
+                                                       </div>
+                                                       <div class="modal-footer">
+                                                           <!--<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>-->
+                                <!--               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a th:href="@{/hotel//hotelDelete//__${hotel.id}__}">Yes</a></button>
+                                                <!--<button type="button" class="btn btn-primary" data-modal-action="yes" data-dismiss="modal">
+                                                    Yes</button>-->
+                                <!--              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>-->
+
+
+
+
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    <p>Hotels</p>
-    <div class="table-responsive">
-        <!--<table class="table table-striped">-->
-        <table class="table table-cell">
-            <thead class="thead-inverse" >
-            <tr>
-                <td><b>Id</b></td>
-                <td><b>Name</b></td>
-                <td><b>Longitude</b></td>
-                <td><b>Latitude</b></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each ="hotel : ${hotelsList}">
-                <td th:utext="${hotel.id}">...</td>
-                <td th:utext="${hotel.name}">...</td>
-                <td th:utext="${hotel.longitude}">...</td>
-                <td th:utext="${hotel.latitude}">...</td>
-                <!--<td><a th:href="@{/hotel/hotelEdit/__${hotel.id}__}">Edit</a> </td>-->
-                <!--<td><button type="button" class="btn btn-link"><a th:href="@{/hotel/hotelEdit/__${hotel.id}__}">Edit</a></button>  </td>-->
-                <td><button type="button" class="btn btn-link"><a href='#' th:href="@{/hotel/hotelEdit/__${hotel.id}__}"><span class="glyphicon glyphicon-pencil"></span></a></button></td>
+    <div class="footer">
 
-                <!--<td data-toggle="modal" data-target="#myModal"><a th:href="@{/hotel//hotelDelete//__${hotel.id}__}">Delete</a></td>-->
-                <td data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-link"><a href='#' th:href="@{/hotel//hotelDelete//__${hotel.id}__}"><span class="glyphicon glyphicon-trash"></span></a></td>
+        <div class="row">
+            <div class="col-lg-12" >
 
-                <!--           <td data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-link">Delete</button></td>
-                           <div class="modal fade" id="myModal" role="dialog">
-                               <div class="modal-dialog modal-lg">
-                                   <div class="modal-content">
-                                       <div class="modal-header">
-                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                           <h4 class="modal-title">Delete hotel</h4>
-                                       </div>
-                                       <div class="modal-body">
-                                           <p>Are you sure you want to delete the hotel?</p>
-                                       </div>
-                                       <div class="modal-footer">
-                                           <!--<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>-->
-                <!--               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a th:href="@{/hotel//hotelDelete//__${hotel.id}__}">Yes</a></button>
-                                <!--<button type="button" class="btn btn-primary" data-modal-action="yes" data-dismiss="modal">
-                                    Yes</button>-->
-                <!--              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                           </div>
-                       </div>
-                   </div>
-               </div>-->
-
-
-
-
-
-
-            </tr>
-            </tbody>
-        </table>
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- Modal -->
-    <!--<div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delete hotel</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete the hotel?</p>
-                </div>
+<script th:src="@{/assets/js/jquery-1.10.2.js}"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- CUSTOM SCRIPTS -->
+<script th:src="@{/assets/js/custom.js}"></script>
 
-                <div class="modal-footer">
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>-->
-    <!--<button data-toggle="modal" data-target="#myModal"><a th:href="@{/hotel//hotelDelete//__${hotel.id}__}">Delete</a></button>-->
-    <!--<button type="button" class="btn btn-primary" data-modal-action="yes" data-dismiss="modal">
-        Yes</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-</div>
-</div>
-</div>
-</div>-->
-</div>
-</div>
+
 </body>
 </html>

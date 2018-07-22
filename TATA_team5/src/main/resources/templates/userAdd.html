@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Notes</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -14,48 +14,98 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+    <title>Admin Panel</title>
+    <link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+    <!-- BOOTSTRAP STYLES-->
+    <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link th:href="@{/assets/css/font-awesome.css}" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-<div class="container">
 
-    <h1>User</h1>
 
-    <form class="form-group" action="/users/userAddNew" th:action="@{/users/userAddNew}" method="post">
-        <input th:type="hidden" name="id" th:field="${usrDetails.id}" />
-        <div class="form-group">
-            <label for="title">Name</label>
-            <input type="text" class="form-control" id="title" th:field="${usrDetails.name}" />
-        </div>
-        <div class="form-group">
-            <label for="surname">Surname</label>
-            <textarea class="form-control" id="surname" th:field="${usrDetails.surname}"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="userName">Username</label>
-            <textarea class="form-control" id="userName" th:field="${usrDetails.userName}"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <textarea class="form-control" id="password" th:field="${usrDetails.password}"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <textarea class="form-control" id="email" th:field="${usrDetails.email}"></textarea>
-        </div>
-        <input th:type="hidden" name="id" th:field="${usrDetails.role}" />
-        <div class="form-group">
-            <label for="longitude">Longitude</label>
-            <textarea class="form-control" id="longitude" th:field="${usrDetails.longitude}"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="latitude">Latitude</label>
-            <textarea class="form-control" id="latitude" th:field="${usrDetails.latitude}"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-default"><a th:href="@{/users/showUsers}">Cancel</a></button>
-    </form>
 
+<div id="wrapper">
+    <div th:replace="adminProfile :: header"></div>
+    <!-- /. NAV TOP  -->
+
+
+    <nav class="navbar-default navbar-side" role="navigation" th:replace="adminProfile :: sidebarMenu"></nav>
+    <!-- /. NAV SIDE  -->
+
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Add new user</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                        <form class="form-group" action="/users/userAddNew" th:action="@{/users/userAddNew}" method="post">
+                            <input th:type="hidden" name="id" th:field="${usrDetails.id}" />
+                            <div class="form-group">
+                                <label for="title">Name</label>
+                                <input type="text" class="form-control" id="title" th:field="${usrDetails.name}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="surname">Surname</label>
+                                <textarea class="form-control" id="surname" th:field="${usrDetails.surname}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="userName">Username</label>
+                                <textarea class="form-control" id="userName" th:field="${usrDetails.userName}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <textarea class="form-control" id="password" th:field="${usrDetails.password}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <textarea class="form-control" id="email" th:field="${usrDetails.email}"></textarea>
+                            </div>
+                            <input th:type="hidden" name="id" th:field="${usrDetails.role}" />
+                            <div class="form-group">
+                                <label for="longitude">Longitude</label>
+                                <textarea class="form-control" id="longitude" th:field="${usrDetails.longitude}"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="latitude">Latitude</label>
+                                <textarea class="form-control" id="latitude" th:field="${usrDetails.latitude}"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-default"><a th:href="@{/users/showUsers}">Cancel</a></button>
+                        </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer">
+
+        <div class="row">
+            <div class="col-lg-12" >
+
+            </div>
+        </div>
+    </div>
 </div>
+
+<script th:src="@{/assets/js/jquery-1.10.2.js}"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- CUSTOM SCRIPTS -->
+<script th:src="@{/assets/js/custom.js}"></script>
+
 
 </body>
 </html>

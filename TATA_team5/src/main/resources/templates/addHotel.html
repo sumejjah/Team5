@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title>Notes</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,35 +13,84 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <title>Admin Panel</title>
+    <link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+    <!-- BOOTSTRAP STYLES-->
+    <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link th:href="@{/assets/css/font-awesome.css}" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-<div class="container">
 
-    <h1>Add hotel</h1>
 
-    <!--<form class="form-group" action="/hotel/notesEdit" th:action="@{/hotel/notesEdit}" method="post">-->
-    <form class="form-group" action="/hotel/addHotelNew" th:action="@{/hotel/addHotelNew}" method="post">
-        <input th:type="hidden" name="id" th:field="${hotelDetail.id}" />
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" th:field="${hotelDetail.name}" />
+
+<div id="wrapper">
+    <div th:replace="adminProfile :: header"></div>
+    <!-- /. NAV TOP  -->
+
+
+    <nav class="navbar-default navbar-side" role="navigation" th:replace="adminProfile :: sidebarMenu"></nav>
+    <!-- /. NAV SIDE  -->
+
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Add new hotel</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <form class="form-group" action="/hotel/addHotelNew" th:action="@{/hotel/addHotelNew}" method="post">
+                        <input th:type="hidden" name="id" th:field="${hotelDetail.id}" />
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" th:field="${hotelDetail.name}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="longitude">Name</label>
+                            <input type="text" class="form-control" id="longitude" th:field="${hotelDetail.longitude}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="latitude">Name</label>
+                            <input type="text" class="form-control" id="latitude" th:field="${hotelDetail.latitude}" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button class="btn btn-primary">Cancel</button>
+
+                    </form>
+
+                </div>
+            </div>
+
         </div>
-        <div class="form-group">
-            <label for="longitude">Name</label>
-            <input type="text" class="form-control" id="longitude" th:field="${hotelDetail.longitude}" />
+    </div>
+    <div class="footer">
+
+        <div class="row">
+            <div class="col-lg-12" >
+
+            </div>
         </div>
-        <div class="form-group">
-            <label for="latitude">Name</label>
-            <input type="text" class="form-control" id="latitude" th:field="${hotelDetail.latitude}" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button class="btn btn-primary">Cancel</button>
-
-    </form>
-
-
+    </div>
 </div>
+
+<script th:src="@{/assets/js/jquery-1.10.2.js}"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- CUSTOM SCRIPTS -->
+<script th:src="@{/assets/js/custom.js}"></script>
+
 
 </body>
 </html>
