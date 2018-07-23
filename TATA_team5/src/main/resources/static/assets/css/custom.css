@@ -96,6 +96,13 @@ min-height: 80px;
 .active-link {
     background-color:#f3f3f3;
 }
+.top-navbar-buttons {
+    float:left;
+    color:#fff;
+    font-size:25px;
+    font-weight:800;
+    margin: 20px 25px 10px 50px;
+}
     
 /*==============================================
     DASHBOARD STYLES    
