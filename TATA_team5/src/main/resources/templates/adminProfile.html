@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Panel</title>
-    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
     <!-- BOOTSTRAP STYLES-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link th:href="@{/assets/css/font-awesome.css}" rel="stylesheet" />
     <!-- CUSTOM STYLES-->
-    <link href="assets/css/custom.css" rel="stylesheet" />
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
@@ -19,7 +19,7 @@
 
 
 <div id="wrapper">
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
         <div class="adjust-nav">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
@@ -28,43 +28,40 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img class="icon" src="images/icons/favicon.ico" />
+                    <img class="icon" th:src="@{/images/icons/favicon.ico}" />
 
                 </a>
 
             </div>
 
             <span class="logout-spn" >
-                  <a href="index.html" style="color:#fff;">LOGOUT</a>
+                  <a th:href="@{/}" style="color:#fff;">LOGOUT</a>
 
                 </span>
         </div>
     </div>
     <!-- /. NAV TOP  -->
-    <nav class="navbar-default navbar-side" role="navigation">
+    <nav class="navbar-default navbar-side" role="navigation" th:fragment="sidebarMenu">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
 
 
 
                 <li class="active-link">
-                    <a href="index.html" ><i class="fa fa-desktop "></i>Dashboard <span class="badge">Included</span></a>
+                    <a th:href="@{/admin}" ><i class="fa fa-desktop "></i>Dashboard <span class="badge">Included</span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-qrcode "></i>My Link One</a>
+                    <a th:href="@{/hotel/all}"><i class="fa fa-qrcode "></i>All hotels</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o"></i>My Link Two</a>
+                    <a th:href="@{/hotel/addHotel}"><i class="fa fa-bar-chart-o"></i>Add hotel</a>
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-edit "></i>My Link Three </a>
+                    <a th:href="@{/users/showUsers}"><i class="fa fa-edit "></i>All users</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-table "></i>My Link Four</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-edit "></i>My Link Five </a>
+                    <a th:href="@{/users/userAdd}"><i class="fa fa-table "></i>Add user</a>
                 </li>
 
             </ul>
@@ -105,7 +102,7 @@
 
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                     <div class="div-square">
-                        <a href="../templates/showUsers.html" onclick="return !window.open(this.href,'Manage Users');" >
+                        <a th:href="@{/users/showUsers}" onclick="return !window.open(this.href,'Manage Users');" >
                             <i class="fa fa-users fa-5x"></i>
                             <h4>See Users</h4>
                         </a>
@@ -114,7 +111,7 @@
 
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                     <div class="div-square">
-                        <a href="../templates/userAdd.html" onclick="return !window.open(this.href,'Add User');" >
+                        <a th:href="@{/users/userAdd}" onclick="return !window.open(this.href,'Add User');" >
                             <i class="fa fa-user fa-5x"></i>
                             <h4>Register User</h4>
                         </a>
@@ -124,16 +121,16 @@
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                     <div class="div-square">
-                        <a href="../templates/showHotels.html" onclick="return !window.open(this.href,'Manage Hotels');" >
-                            <img class="imageiconedithotel" src="assets/img/edithotelicon.png"/>
+                        <a href="showHotels.html" onclick="return !window.open(this.href,'Manage Hotels');" >
+                            <img class="imageiconedithotel" th:src="@{/assets/img/edithotelicon.png}"/>
                             <h4>See Hotels</h4>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
                     <div class="div-square">
-                        <a href="../templates/addHotel.html" onclick="return !window.open(this.href,'Add Hotel');" >
-                            <img class="imageiconhotel" src="assets/img/hotelicon.png"/>
+                        <a href="addHotel.html" onclick="return !window.open(this.href,'Add Hotel');" >
+                            <img class="imageiconhotel" th:src="@{/assets/img/hotelicon.png}"/>
                             <h4>Register Hotels</h4>
                         </a>
                     </div>
@@ -149,16 +146,16 @@
         </div>
     </div>
 </div>
-
+</div>
 
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-<script src="assets/js/jquery-1.10.2.js"></script>
+<script th:src="@{/assets/js/jquery-1.10.2.js}"></script>
 <!-- BOOTSTRAP SCRIPTS -->
-<script src="assets/js/bootstrap.min.js"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
 <!-- CUSTOM SCRIPTS -->
-<script src="assets/js/custom.js"></script>
+<script th:src="@{/assets/js/custom.js}"></script>
 
 
 </body>

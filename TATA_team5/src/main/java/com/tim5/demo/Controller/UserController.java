@@ -52,7 +52,9 @@ public class UserController {
     public String addNewUser(Model model, Users user) {
         model.addAttribute("usrDetails", new Users());
 
-        usersRepository.save(new Users(user.getName(), user.getSurname(), user.getUserName(), user.getPassword(), user.getEmail(), user.getRole(), user.getLongitude(), user.getLatitude()));
+        if(user.getName() != "") {
+            usersRepository.save(new Users(user.getName(), user.getSurname(), user.getUserName(), user.getPassword(), user.getEmail(), user.getRole(), user.getLongitude(), user.getLatitude()));
+        }
         model.addAttribute("usrList",(List<Users>) usersRepository.findAll());
         return "showUsers";
     }

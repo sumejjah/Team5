@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Notes</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <h1>Edit hotel</h1>
+
+    <!--<form class="form-group" action="/hotel/notesEdit" th:action="@{/hotel/notesEdit}" method="post">-->
+    <form class="form-group" action="/hotel/hotelEdit" th:action="@{/hotel/hotelEdit}" method="post">
+        <input th:type="hidden" name="id" th:field="${hotelDetail.id}" />
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="${hotelDetail.name}" />
+        </div>
+        <div class="form-group">
+            <label for="longitude">Name</label>
+            <input type="text" class="form-control" id="longitude" th:field="${hotelDetail.longitude}" />
+        </div>
+        <div class="form-group">
+            <label for="latitude">Name</label>
+            <input type="text" class="form-control" id="latitude" th:field="${hotelDetail.latitude}" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-primary">Cancel</button>
+
+    </form>
+
+
+</div>
+
+</body>
+</html>

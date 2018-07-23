@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Employee List</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,49 +14,94 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+    <title>Admin Panel</title>
+    <link rel="icon" type="image/png" th:href="@{/images/icons/favicon.ico}"/>
+    <!-- BOOTSTRAP STYLES-->
+    <link th:href="@{/assets/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link th:href="@{/assets/css/font-awesome.css}" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link th:href="@{/assets/css/custom.css}" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-<div class="container">
-    <h2>Users list</h2>
-    <button type="button" class="btn btn-link"><a th:href="@{/users/userAdd}">
-        <span class="glyphicon glyphicon-pencil"></span>
-    </a></button>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <tr>
-                <td>Id</td>
-                <td>Name</td>
-                <td>Surname</td>
-                <td>Username</td>
-                <td>Password</td>
-                <td>Email</td>
-                <td>Role</td>
-                <td>Longitude</td>
-                <td>Latitude</td>
-            </tr>
-            <tr th:each ="users : ${usrList}">
-                <td th:utext="${users.id}" value="${users.id}">...</td>
-                <td th:utext="${users.name}">...</td>
-                <td th:utext="${users.surname}">...</td>
-                <td th:utext="${users.userName}">...</td>
-                <td th:utext="${users.password}">...</td>
-                <td th:utext="${users.email}">...</td>
-                <td th:utext="${users.role}">...</td>
-                <td th:utext="${users.longitude}">...</td>
-                <td th:utext="${users.latitude}">...</td>
-                <td><button type="button" class="btn btn-link"><a th:href="@{/users/userEdit/__${users.id}__}">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </a></button></td>
-                <td><button type="button" class="btn btn-link"><a th:href="@{/users/userDelete/__${users.id}__}">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </a></button></td>
-
-            </tr>
-        </table>
 
 
+
+<div id="wrapper">
+    <div th:replace="adminProfile :: header"></div>
+    <!-- /. NAV TOP  -->
+
+
+    <nav class="navbar-default navbar-side" role="navigation" th:replace="adminProfile :: sidebarMenu"></nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Users</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <span th:each ="users : ${usrList}">
+                      <span href="#" class="list-group-item">
+                        <div class="panel-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-2 col-lg-2">
+                                        <p class="text-right">Name: </p>
+                                        <p class="text-right">Surname: </p>
+                                        <p class="text-right">Username: </p>
+                                        <p class="text-right">Email: </p>
+                                        <p class="text-right">Longitude: </p>
+                                        <p class="text-right">Latitude: </p>
+                                    </div>
+                                    <div class="col-sm-9 col-md-10 col-lg-10">
+                                        <p><span th:utext="${users.name}"></span></p>
+                                        <p><span th:utext="${users.surname}"></span></p>
+                                        <p><span th:utext="${users.userName}"></span></p>
+                                        <p><span th:utext="${users.email}"></span></p>
+                                        <p><span th:utext="${users.longitude}"></span></p>
+                                        <p><span th:utext="${users.latitude}"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a th:href="@{/users/userDelete/__${users.id}__}"><span class="glyphicon glyphicon-remove btn pull-right" style="font-size: x-large;"></span></a>
+                            <a th:href="@{/users/userEdit/__${users.id}__}"><span class="glyphicon glyphicon-pencil btn pull-right" style="font-size: x-large;"></span></a>
+
+                        </div>
+                      </span>
+                     </span>
+                    <div style="background-color: #33ccff">
+                        <h2><button data-toggle="tooltip" data-placement="down" title="Add new user" type="button" class="btn btn-link pull-right center-block" ><a th:href="@{/users/userAdd}" href="#"><span class="glyphicon glyphicon-plus" style="font-size: x-large"></span></a></button></h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+    <div class="footer">
 
+        <div class="row">
+            <div class="col-lg-12" >
+
+            </div>
+        </div>
+    </div>
 </div>
+
+<script th:src="@{/assets/js/jquery-1.10.2.js}"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<!-- CUSTOM SCRIPTS -->
+<script th:src="@{/assets/js/custom.js}"></script>
+
+
 </body>
 </html>
