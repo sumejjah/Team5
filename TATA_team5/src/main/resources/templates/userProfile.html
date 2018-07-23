@@ -73,7 +73,7 @@
             <hr />
             <div class="container">
                 <div class="row" style="position: absolute;">
-                    <div class="col-*-12">
+                    <div class="col-md-12 col-lg-12">
                         <h4>Route to your desired location</h4>
                         <p>View from google map</p>
                         <!-- map -->
@@ -81,7 +81,8 @@
                             <script th:src="@{static/assets/js/createMap.js}" type="text/javascript"></script>
 
                         </div>
-
+                    </div>
+                    <div class="col-md-12 col-lg-12">
                         <form class="form-group" action="/reservation/__${currentUsrId}__/__${hotel_id}__/add" th:action="@{/reservation/__${currentUsrId}__/__${hotel_id}__/add}" method="get">
                             <input th:type="hidden" name="id" th:field="${currentUsrId}" />
                             <div class="form-group" th:type="hidden">
@@ -92,7 +93,6 @@
                             </div>
                             <button type="submit" class="btn btn-primary pull-right">Book</button>
                         </form>
-
                     </div>
                 </div>
             </div>

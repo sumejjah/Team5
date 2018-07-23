@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,22 @@ public class UserController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<Optional<Users>>(user, HttpStatus.OK);
+    }
+
+    // RETRIEVE ONE USER
+    @RequestMapping(method = RequestMethod.GET, value = "/findUser")
+    String findUser(@RequestParam String usrName, Model model) {
+
+        List<Users> users = this.usersRepository.findAll();
+        List<Users> result = new ArrayList<Users>();
+        for(int i = 0; i< users.size(); i++){
+            if (users.get(i).getName().contains(usrName) || users.get(i).getSurname().contains(usrName)){
+                result.add(users.get(i));
+            }
+        }
+
+        model.addAttribute("usrList", result);
+        return "showUsers";
     }
 
     //CREATE NEW USER

@@ -42,7 +42,7 @@ public class HotelController {
         return new ResponseEntity<Optional<Hotel>>(hotel, HttpStatus.OK);
     }
 
-    //CREATE NEW USER
+    //CREATE NEW HOTEL
     @RequestMapping(path = "/addHotel", method = RequestMethod.GET)
     public String createProduct(Model model) {
         model.addAttribute("hotelDetail", new Hotel());
@@ -51,8 +51,10 @@ public class HotelController {
     @RequestMapping(path = "/addHotelNew", method = RequestMethod.POST)
     public String addNewHotel(Model model, Hotel hotel) {
         model.addAttribute("hotelDetail", new Hotel());
-        hotelRepository.save(new Hotel(hotel.getName(), hotel.getLongitude(), hotel.getLatitude()));
-        model.addAttribute("hotelsList",(List<Hotel>) hotelRepository.findAll());
+        if(hotel.getName() != "" && hotel.getLatitude()!= null && hotel.getLongitude() != null){
+            hotelRepository.save(new Hotel(hotel.getName(), hotel.getLongitude(), hotel.getLatitude()));
+            model.addAttribute("hotelsList",(List<Hotel>) hotelRepository.findAll());
+        }
         return "showHotels";
     }
 
