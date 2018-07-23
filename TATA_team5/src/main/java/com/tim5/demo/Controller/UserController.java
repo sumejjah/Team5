@@ -1,6 +1,8 @@
 package com.tim5.demo.Controller;
 
+import com.tim5.demo.entity.Hotel;
 import com.tim5.demo.entity.Users;
+import com.tim5.demo.repository.HotelRepository;
 import com.tim5.demo.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,9 @@ public class UserController {
     //all, add, delete, update
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private HotelRepository hotelRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "/showUsers")
     public String findAllNew(Model model){
@@ -46,6 +51,40 @@ public class UserController {
         model.addAttribute("usrDetails", new Users());
 
         return "userAdd";
+    }
+
+    @RequestMapping(path = "/{userId}/reserve", method = RequestMethod.GET)
+    public String userPanel(@PathVariable Long userId, Model model) {
+        model.addAttribute("currentUsrId", userId);
+        model.addAttribute("currentUsrLong", usersRepository.findById(userId).get().getLongitude());
+        model.addAttribute("currentUsrLat", usersRepository.findById(userId).get().getLatitude());
+        model.addAttribute("hotel_id", 1);
+        model.addAttribute("hotelsList", hotelRepository.findAll());
+        return "userProfile";
+    }
+
+    //LOGIN
+    @RequestMapping(method = RequestMethod.GET, value = "/openPanel")
+    public String findUserbyName(@RequestParam String username, @RequestParam String password, Model model){
+
+        List<Users> users = this.usersRepository.findAll();
+
+        for(int i = 0; i < users.size(); i++){
+            if(users.get(i).getUserName().equals(username) && users.get(i).getPassword().equals(password)){
+                if (users.get(i).getRole().equals("korisnik")){
+                    return "redirect:/users/"+users.get(i).getId().toString()+"/reserve";
+                }
+                else if (users.get(i).getRole().equals("supervisor")){
+                    return "redirect:/supervisorProfile";
+                }
+                else{
+                    return "redirect:/admin";
+                }
+
+            }
+        }
+
+        return "redirect:/";
     }
 
     @RequestMapping(path = "/userAddNew", method = RequestMethod.POST)

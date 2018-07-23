@@ -24,6 +24,14 @@ public class Reservation {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Hotel hotel;
 
+    public Reservation(Users users, Hotel hotel) {
+        this.users = users;
+        this.hotel = hotel;
+    }
+
+    public Reservation() {
+    }
+
     public Users getUsers() {
         return users;
     }

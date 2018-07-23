@@ -1,23 +1,36 @@
 package com.tim5.demo.Controller;
 
+import com.tim5.demo.entity.Hotel;
 import com.tim5.demo.entity.Reservation;
+import com.tim5.demo.entity.Users;
+import com.tim5.demo.repository.HotelRepository;
 import com.tim5.demo.repository.ReservationRepository;
+import com.tim5.demo.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/reservation")
 public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
+
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    @Autowired
+    private UsersRepository usersRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public ResponseEntity<Collection<Reservation>> findAll(){
@@ -43,35 +56,30 @@ public class ReservationController {
         return new ResponseEntity<Optional<Reservation>>(reservation, HttpStatus.OK);
     }
 
-    //CREATE NEW USER
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> createReservation(@RequestBody Reservation reservation, UriComponentsBuilder ucBuilder) {
+    //CREATE NEW RESERVATION
+    @RequestMapping(method = RequestMethod.GET, value = "{currentUsrId}/{hotel_id}/add")
+    public String findUserbyName(@RequestParam Long currentUsrId, @RequestParam Long hotel_id, Model model){
 
-        Collection<Reservation>  reservations = this.reservationRepository.findAll();
+        List<Reservation> reservations = this.reservationRepository.findAll();
         boolean exists = false;
 
-        reservationRepository.save(reservation);
+        for(int i = 0; i < reservations.size(); i++){
+            if(reservations.get(i).getHotel().getId().equals(hotel_id) && reservations.get(i).getUsers().getId().equals(currentUsrId)){
+                exists = true;
+            }
+        }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/reservation/{id}").buildAndExpand(reservation.getId()).toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        Optional<Users> users = usersRepository.findById(currentUsrId);
+        Optional<Hotel> hotel = hotelRepository.findById(hotel_id);
+
+        if (!exists && users.isPresent() && hotel.isPresent()){
+            reservationRepository.save(new Reservation(users.get(), hotel.get()));
+        }
+
+
+        return "redirect:/users/"+currentUsrId+"/reserve";
     }
 
-    //UPDATE
-    /*@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Object> updateUser(@RequestBody Users user, @PathVariable long id) {
-
-        Optional<Users> userOptional = usersRepository.findById(id);
-
-        if (!userOptional.isPresent())
-            return ResponseEntity.notFound().build();
-
-        user.setId(id);
-
-        usersRepository.save(user);
-
-        return new ResponseEntity().noContent().build();
-    }*/
 
     //DELETE ONE)
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

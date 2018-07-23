@@ -34,7 +34,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="/users/openPanel" th:action="@{/users/openPanel}" method="get">
 					<span class="login100-form-title p-b-26">
 						Welcome
 					</span>
@@ -43,7 +43,7 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" >
-						<input class="input100" type="text" name="username" id="username">
+						<input class="input100" type="text" name="username" id="username" th:filed="*{username}">
 						<span class="focus-input100" data-placeholder="Username"></span>
 					</div>
 
@@ -51,14 +51,14 @@
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass" id="password">
+						<input class="input100" type="text" name="password" id="password" th:filed="*{password}">
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<input type="button" value="Login" id="submit" onclick="validate()"/>
+							<button class="login100-form-btn" type="submit"> Login</button>
 						</div>
 					</div>
 
