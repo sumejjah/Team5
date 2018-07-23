@@ -5,11 +5,11 @@ function validate(){
     var password = document.getElementById("password").value;
     if ( username == "user" && password == "user"){
         alert ("Login successful");
-        window.location = "userProfile.html"; // Redirecting to other page.
+        window.location = "../../templates/userProfile.html"; // Redirecting to other page.
         return false;
     }else if ( username == "admin" && password == "admin"){
         alert ("Login successful");
-        window.location = "adminProfile.html"; // Redirecting to other page.
+        window.location = "../templates/adminProfile.html"; // Redirecting to other page.
         return false;
     } else if ( username == "supervisor" && password == "supervisor"){
         alert ("Login successful");
