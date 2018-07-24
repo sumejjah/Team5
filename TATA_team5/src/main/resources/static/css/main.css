@@ -40,6 +40,13 @@
 body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;
+  background-image: url("http://www.tokkoro.com/picsup/2942615-architecture-building-city-cityscape-strasbourg-france-old-building-house-lights-sunset-clouds-evening-reflection-river-street-bridge___landscape-nature-wallpapers.jpg");
+  background-repeat:no-repeat;
+  background-size:cover;
+  width:100%;
+  height:100vh;
+  overflow:auto;
+
 }
 
 /*---------------------------------------------*/
@@ -138,6 +145,8 @@ iframe {
 }
 
 
+
+
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
@@ -174,7 +183,13 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #f2f2f2;  
+  /*background: #f2f2f2;*/
+  background-image: url("http://www.tokkoro.com/picsup/2942615-architecture-building-city-cityscape-strasbourg-france-old-building-house-lights-sunset-clouds-evening-reflection-river-street-bridge___landscape-nature-wallpapers.jpg");
+  background-repeat:no-repeat;
+  background-size:cover;
+  width:100%;
+  height:100vh;
+  overflow:auto;
 }
 
 .wrap-login100 {
@@ -209,6 +224,10 @@ iframe {
 }
 .login100-form-title i {
   font-size: 60px;
+}
+.login100-form-title img {
+  height: 100px;
+  width: 100px;
 }
 
 /*------------------------------------------------------------------
