@@ -70,13 +70,14 @@ public class UserController {
         return "userAdd";
     }
 
-    @RequestMapping(path = "/{userId}/reserve", method = RequestMethod.GET)
-    public String userPanel(@PathVariable Long userId, Model model) {
+    @RequestMapping(path = "/{userId}/reserve/{message}", method = RequestMethod.GET)
+    public String userPanel(@PathVariable Long userId, @PathVariable String message, Model model) {
         model.addAttribute("currentUsrId", userId);
         model.addAttribute("currentUsrLong", usersRepository.findById(userId).get().getLongitude());
         model.addAttribute("currentUsrLat", usersRepository.findById(userId).get().getLatitude());
         model.addAttribute("hotel_id", 1);
         model.addAttribute("hotelsList", hotelRepository.findAll());
+        model.addAttribute("message", message);
         return "userProfile";
     }
 
@@ -85,11 +86,12 @@ public class UserController {
     public String findUserbyName(@RequestParam String username, @RequestParam String password, Model model){
 
         List<Users> users = this.usersRepository.findAll();
+        String message = "Welcome!";
 
         for(int i = 0; i < users.size(); i++){
             if(users.get(i).getUserName().equals(username) && users.get(i).getPassword().equals(password)){
                 if (users.get(i).getRole().equals("korisnik")){
-                    return "redirect:/users/"+users.get(i).getId().toString()+"/reserve";
+                    return "redirect:/users/"+users.get(i).getId().toString()+"/reserve/" + message;
                 }
                 else if (users.get(i).getRole().equals("supervisor")){
                     return "redirect:/supervisorProfile";

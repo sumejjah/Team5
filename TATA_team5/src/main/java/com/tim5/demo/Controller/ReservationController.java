@@ -62,10 +62,13 @@ public class ReservationController {
 
         List<Reservation> reservations = this.reservationRepository.findAll();
         boolean exists = false;
+        String message = "Done!";
 
         for(int i = 0; i < reservations.size(); i++){
             if(reservations.get(i).getHotel().getId().equals(hotel_id) && reservations.get(i).getUsers().getId().equals(currentUsrId)){
                 exists = true;
+                message = "You have already booked this hotel!";
+                model.addAttribute("message", message);
             }
         }
 
@@ -77,7 +80,7 @@ public class ReservationController {
         }
 
 
-        return "redirect:/users/"+currentUsrId+"/reserve";
+        return "redirect:/users/"+currentUsrId+"/reserve/" + message;
     }
 
 

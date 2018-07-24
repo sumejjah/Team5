@@ -169,4 +169,12 @@ min-height: 80px;
  
 }
 
+.hotel-dugme{
+    padding: 15px 10px;
+    color: #214761;
+    font-weight: 900;
+    font-size: 18px;
+    width: 250px;
+}
+
 

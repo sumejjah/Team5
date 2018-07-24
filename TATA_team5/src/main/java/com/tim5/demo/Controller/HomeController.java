@@ -26,11 +26,6 @@ public class HomeController {
         return "adminProfile";
     }
 
-    /*@RequestMapping(path = "/user", method = RequestMethod.GET)
-    public String userPanel() {
-        return "userProfile";
-    }*/
-
     @RequestMapping(path = "/supervisor", method = RequestMethod.GET)
     public String supervisorPanel() {
         return "supervisorProfile";
