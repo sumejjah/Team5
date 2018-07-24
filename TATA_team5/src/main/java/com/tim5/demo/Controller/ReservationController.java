@@ -15,10 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/reservation")
@@ -32,17 +29,30 @@ public class ReservationController {
     @Autowired
     private UsersRepository usersRepository;
 
+    //GET ALL RESERVATIONS
     @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public ResponseEntity<Collection<Reservation>> findAll(){
+    public String findAll(Model model){
 
-        Collection<Reservation> reservations = this.reservationRepository.findAll();
+        List<Reservation> reservations = this.reservationRepository.findAll();
 
-        if(reservations.isEmpty()){
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        List<Double> startLongitude = new ArrayList<Double>();
+        List<Double> startLatitude = new ArrayList<Double>();
+        List<Double> endLongitude = new ArrayList<Double>();
+        List<Double> endLatitude = new ArrayList<Double>();
+
+        for(int i = 0; i < reservations.size(); i++){
+            startLongitude.add(reservations.get(i).getUsers().getLongitude());
+            startLatitude.add(reservations.get(i).getUsers().getLatitude());
+            endLongitude.add(reservations.get(i).getHotel().getLongitude());
+            endLatitude.add(reservations.get(i).getHotel().getLatitude());
         }
 
+        model.addAttribute("startLongitude", startLongitude);
+        model.addAttribute("startLatitude", startLatitude);
+        model.addAttribute("endLongitude",endLongitude);
+        model.addAttribute("endLatitude", endLatitude);
 
-        return new ResponseEntity<Collection<Reservation>>(reservations, HttpStatus.OK);
+        return "supervisorProfile";
     }
 
     // RETRIEVE ONE CAKE SHOP

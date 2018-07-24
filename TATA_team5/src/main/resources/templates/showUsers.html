@@ -80,6 +80,9 @@
                         <div class="panel-body">
                             <div class="container">
                                 <div class="row">
+                                    <div class="col-sm-2 col-md-3 col-lg-3">
+                                        <img th:src="@{/images/user-icon.png}" alt="Not available" class="img-thumbnail">
+                                    </div>
                                     <div class="col-sm-3 col-md-2 col-lg-2">
                                         <p class="text-right">Name: </p>
                                         <p class="text-right">Surname: </p>
@@ -88,7 +91,7 @@
                                         <p class="text-right">Longitude: </p>
                                         <p class="text-right">Latitude: </p>
                                     </div>
-                                    <div class="col-sm-9 col-md-10 col-lg-10">
+                                    <div class="col-sm-7 col-md-7 col-lg-7">
                                         <p><span th:utext="${users.name}"></span></p>
                                         <p><span th:utext="${users.surname}"></span></p>
                                         <p><span th:utext="${users.userName}"></span></p>
