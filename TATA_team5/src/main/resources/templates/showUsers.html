@@ -37,6 +37,27 @@
 
     <nav class="navbar-default navbar-side" role="navigation" th:replace="adminProfile :: sidebarMenu"></nav>
     <!-- /. NAV SIDE  -->
+    <nav class="navbar-default navbar-side" role="navigation" th:fragment="sidebarMenu">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a th:href="@{/admin}" ><i class="fa fa-desktop "></i>Home <span class="badge">Included</span></a>
+                </li>
+                <li>
+                    <a th:href="@{/hotel/all}"><i class="fa fa-desktop"></i>All hotels</a>
+                </li>
+                <li>
+                    <a th:href="@{/hotel/addHotel}"><i class="fa fa-plus-circle"></i>Add hotel</a>
+                </li>
+                <li class="active-link">
+                    <a th:href="@{/users/showUsers}"><i class="fa fa-users"></i>All users</a>
+                </li>
+                <li>
+                    <a th:href="@{/users/userAdd}"><i class="fa fa-plus-circle"></i>Add user</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div id="page-wrapper" >
         <div id="page-inner">
             <div class="row">

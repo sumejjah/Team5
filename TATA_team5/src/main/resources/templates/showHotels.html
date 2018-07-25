@@ -37,84 +37,77 @@
 
     <nav class="navbar-default navbar-side" role="navigation" th:replace="adminProfile :: sidebarMenu"></nav>
     <!-- /. NAV SIDE  -->
-    <div id="page-wrapper" >
-        <div id="page-inner">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Hotels</h2>
-                </div>
-            </div>
-            <!-- /. ROW  -->
-            <hr />
+    <nav class="navbar-default navbar-side" role="navigation" th:fragment="sidebarMenu">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a th:href="@{/admin}" ><i class="fa fa-desktop "></i>Home <span class="badge">Included</span></a>
+                </li>
+                <li class="active-link">
+                    <a th:href="@{/hotel/all}"><i class="fa fa-desktop"></i>All hotels</a>
+                </li>
+                <li>
+                    <a th:href="@{/hotel/addHotel}"><i class="fa fa-plus-circle"></i>Add hotel</a>
+                </li>
+                <li>
+                    <a th:href="@{/users/showUsers}"><i class="fa fa-users"></i>All users</a>
+                </li>
+                <li>
+                    <a th:href="@{/users/userAdd}"><i class="fa fa-plus-circle"></i>Add user</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper" class="pozadina-hotel">
+        <div id="page-inner" class="pozadina-hotel">
+            <div class="container-add">
+                <div class="wrap-hotelsList">
+                    <div class="col-lg-12" style="text-align: center">
+                        <h2>Hotels</h2>
+                    </div>
 
-            <div class="row">
-                <div class="col-md-1 col-lg-1"></div>
-                <div class="col-md-10 col-lg-10">
-                    <h2><button type="button" class="btn btn-link pull-right center-block" ><a th:href="@{/hotel/addHotel}" href="#"><span class="glyphicon glyphicon-plus"></span></a></button></h2>
-                </div>
-                <div class="col-md-1 col-lg-1"></div>
-            </div>
+                    <hr />
 
-            <div class="row">
-                <div class="col-md-1 col-lg-1"></div>
-                <div class="col-md-10 col-lg-10">
-                    <div class="table-responsive">
-                        <!--<table class="table table-striped">-->
-                        <table class="table table-cell">
-                            <thead class="thead-inverse" >
-                            <tr>
-                                <!--<td th:type="hidden"><b>Id</b></td>-->
-                                <td><b>Name</b></td>
-                                <td><b>Longitude</b></td>
-                                <td><b>Latitude</b></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each ="hotel : ${hotelsList}">
-                                <!--<td th:utext="${hotel.id}" th:type="hidden">...</td>-->
-                                <td th:utext="${hotel.name}">...</td>
-                                <td th:utext="${hotel.longitude}">...</td>
-                                <td th:utext="${hotel.latitude}">...</td>
-                                <!--<td><a th:href="@{/hotel/hotelEdit/__${hotel.id}__}">Edit</a> </td>-->
-                                <!--<td><button type="button" class="btn btn-link"><a th:href="@{/hotel/hotelEdit/__${hotel.id}__}">Edit</a></button>  </td>-->
-                                <td><button type="button" class="btn btn-link"><a href='#' th:href="@{/hotel/hotelEdit/__${hotel.id}__}"><span class="glyphicon glyphicon-pencil"></span></a></button></td>
+                    <!--<div class="row">-->
+                    <div class="col-md-1 col-lg-1"></div>
+                    <div class="col-md-10 col-lg-10">
+                        <h2><button data-toggle="tooltip" title="Add new hotel" type="button" class="btn btn-link pull-right center-block" ><a th:href="@{/hotel/addHotel}" href="#"><span class="glyphicon glyphicon-plus"></span></a></button></h2>
+                    </div>
+                    <div class="col-md-1 col-lg-1"></div>
 
-                                <!--<td data-toggle="modal" data-target="#myModal"><a th:href="@{/hotel//hotelDelete//__${hotel.id}__}">Delete</a></td>-->
-                                <td data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-link"><a href='#' th:href="@{/hotel//hotelDelete//__${hotel.id}__}"><span class="glyphicon glyphicon-trash"></span></a></td>
-
-                                <!--           <td data-toggle="modal" data-target="#myModal"><button type="button" class="btn btn-link">Delete</button></td>
-                                           <div class="modal fade" id="myModal" role="dialog">
-                                               <div class="modal-dialog modal-lg">
-                                                   <div class="modal-content">
-                                                       <div class="modal-header">
-                                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                           <h4 class="modal-title">Delete hotel</h4>
-                                                       </div>
-                                                       <div class="modal-body">
-                                                           <p>Are you sure you want to delete the hotel?</p>
-                                                       </div>
-                                                       <div class="modal-footer">
-                                                           <!--<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>-->
-                                <!--               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><a th:href="@{/hotel//hotelDelete//__${hotel.id}__}">Yes</a></button>
-                                                <!--<button type="button" class="btn btn-primary" data-modal-action="yes" data-dismiss="modal">
-                                                    Yes</button>-->
-                                <!--              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>-->
-
-
-
-
-
-
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div class="row">
+                        <!--<div class="col-md-1 col-lg-1"></div>-->
+                        <div class="col-md-12 col-lg-12">
+                            <div class="table-responsive">
+                                <!--<table class="table table-striped">-->
+                                <table class="table table-cell">
+                                    <!--<thead class="thead-inverse" >-->
+                                    <thead class="tab-header-background" style="background-color: lightgrey">
+                                    <tr>
+                                        <!--<td th:type="hidden"><b>Id</b></td>-->
+                                        <td><b>Name</b></td>
+                                        <td><b>Longitude</b></td>
+                                        <td><b>Latitude</b></td>
+                                        <td><b></b></td>
+                                        <td><b></b></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each ="hotel : ${hotelsList}">
+                                        <!--<td th:utext="${hotel.id}" th:type="hidden">...</td>-->
+                                        <td th:utext="${hotel.name}">...</td>
+                                        <td th:utext="${hotel.longitude}">...</td>
+                                        <td th:utext="${hotel.latitude}">...</td>
+                                        <td><button data-toggle="tooltip" title="Edit" type="button" class="btn btn-link"><a href='#' th:href="@{/hotel/hotelEdit/__${hotel.id}__}"><span class="glyphicon glyphicon-pencil"></span></a></button></td>
+                                        <td data-toggle="modal" data-target="#myModal"><button data-toggle="tooltip" title="Delete" type="button" class="btn btn-link"><a href='#' th:href="@{/hotel//hotelDelete//__${hotel.id}__}"><span class="glyphicon glyphicon-trash"></span></a></button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--<div class="col-md-1 col-lg-1"></div>-->
                     </div>
                 </div>
-                <div class="col-md-1 col-lg-1"></div>
             </div>
         </div>
     </div>
