@@ -25,6 +25,43 @@
     <link th:href="@{/assets/css/custom.css}" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <script>
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+        function validateForm() {
+            var mistake = true;
+            var name = document.forms["formUsr"]["name"].value;
+            var longitude = document.forms["formUsr"]["longitude"].value;
+            var latitude = document.forms["formUsr"]["latitude"].value;
+
+            if (name.length < 2) {
+                document.getElementById("name").value = "Name not valid!";
+                document.getElementById("name").style.color = "red";
+                mistake = false;
+            }
+            if (isNaN(longitude) || longitude == "") {
+                document.getElementById("longitude").value = "Longitude must be number!";
+                document.getElementById("longitude").style.color = "red";
+                mistake = false;
+            }
+            if (isNaN(latitude) || latitude == "") {
+                document.getElementById("latitude").value = "Latitude must be number!";
+                document.getElementById("latitude").style.color = "red";
+                mistake = false;
+            }
+
+            return mistake;
+        }
+
+        function clearInput(elementChange){
+            document.getElementById(elementChange).value = "";
+            document.getElementById(elementChange).style.color = "black";
+        }
+    </script>
 </head>
 <body>
 
@@ -72,19 +109,19 @@
                             <div class="col-md-2 col-lg-2"></div>
                             <!--<div class="col-md-6 col-lg-6">-->
                             <div class="col-md-8">
-                                <form class="form-group" action="/hotel/addHotelNew" th:action="@{/hotel/addHotelNew}" method="post">
+                                <form class="form-group" name="formUsr" action="/hotel/addHotelNew" th:action="@{/hotel/addHotelNew}" method="post" onsubmit="return validateForm()">
                                     <input th:type="hidden" name="id" th:field="${hotelDetail.id}" />
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" class="form-control" id="name" th:field="${hotelDetail.name}" />
+                                        <input type="text" class="form-control" name="name" id="name" th:field="${hotelDetail.name}" onfocus="clearInput('name')"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="longitude">Longitude</label>
-                                        <input type="text" class="form-control" id="longitude" th:field="${hotelDetail.longitude}" />
+                                        <input type="text" class="form-control" name="longitude" id="longitude" th:field="${hotelDetail.longitude}" onfocus="clearInput('longitude')"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="latitude">Latitude</label>
-                                        <input type="text" class="form-control" id="latitude" th:field="${hotelDetail.latitude}" />
+                                        <input type="text" class="form-control" name="latitude" id="latitude" th:field="${hotelDetail.latitude}" onfocus="clearInput('latitude')"/>
                                     </div>
 
                                     <button class="btn btn-default"><a th:href="@{/hotel/all}">Cancel</a></button>

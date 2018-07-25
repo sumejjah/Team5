@@ -90,7 +90,7 @@ public class UserController {
 
         for(int i = 0; i < users.size(); i++){
             if(users.get(i).getUserName().equals(username) && users.get(i).getPassword().equals(password)){
-                if (users.get(i).getRole().equals("korisnik")){
+                if (users.get(i).getRole().equals("user")){
                     return "redirect:/users/"+users.get(i).getId().toString()+"/reserve/" + message;
                 }
                 else if (users.get(i).getRole().equals("supervisor")){
@@ -103,7 +103,9 @@ public class UserController {
             }
         }
 
-        return "redirect:/";
+        message = "USER NOT FOUND!";
+        model.addAttribute("message", message);
+        return "loginPage";
     }
 
     @RequestMapping(path = "/userAddNew", method = RequestMethod.POST)

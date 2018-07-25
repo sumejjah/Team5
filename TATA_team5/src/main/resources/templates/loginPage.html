@@ -28,12 +28,41 @@
 <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <script th:src="@{/js/login.js}"></script>
+	<script>
+        function validateForm() {
+            var usrName = document.forms["myForm"]["username"].value;
+            var pswrd = document.forms["myForm"]["password"].value;
+
+            if (usrName == "") {
+                document.getElementById("username").value = "Please enter username!";
+                document.getElementById("username").style.color = "red";
+                return false;
+            }
+            else if (pswrd == "") {
+                document.getElementById("password").value = "Please enter password!";
+                document.getElementById("password").style.color = "red";
+                document.getElementById("password").type = "text";
+                return false;
+            }
+        }
+
+        function clearUsername(){
+            document.getElementById("username").value = "";
+            document.getElementById("username").style.color = "black";
+        }
+
+        function clearPassword(){
+            document.getElementById("password").value = "";
+            document.getElementById("password").style.color = "black";
+            document.getElementById("password").type = "password";
+        }
+	</script>
 </head>
 <body>
 		<div class="limiter">
 			<div class="container-login100">
 				<div class="wrap-login100">
-					<form class="login100-form validate-form" action="/users/openPanel" th:action="@{/users/openPanel}" method="get">
+					<form class="login100-form validate-form" name="myForm" action="/users/openPanel" th:action="@{/users/openPanel}" method="get" onsubmit="return validateForm()">
 						<span class="login100-form-title p-b-26">
 							Welcome
 						</span>
@@ -44,7 +73,7 @@
 						</span>
 
 						<div class="wrap-input100 validate-input" >
-							<input class="input100" type="text" name="username" id="username" th:filed="*{username}" th:placeholder="Username">
+							<input class="input100" type="text" name="username" id="username" th:filed="*{username}" th:placeholder="Username" onfocus="clearUsername()">
 							<span class="focus-input100"></span>
 						</div>
 
@@ -52,8 +81,12 @@
 							<span class="btn-show-pass">
 								<i class="zmdi zmdi-eye"></i>
 							</span>
-							<input class="input100" type="password" name="password" id="password" th:filed="*{password}" th:placeholder="Password">
+							<input class="input100" type="password" name="password" id="password" th:filed="*{password}" th:placeholder="Password" onfocus="clearPassword()">
 							<span class="focus-input100"></span>
+						</div>
+
+						<div th:if="${message}">
+							<strong th:text="${message}" style="color: orangered"></strong>
 						</div>
 
 						<div class="container-login100-form-btn">

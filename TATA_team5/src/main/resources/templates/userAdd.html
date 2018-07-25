@@ -25,6 +25,70 @@
     <link th:href="@{/assets/css/custom.css}" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <script>
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+        function validateForm() {
+            var mistake = true;
+            var name = document.forms["userAddForm"]["title"].value;
+            var surname = document.forms["userAddForm"]["surname"].value;
+            var email = document.forms["userAddForm"]["email"].value;
+            var userName = document.forms["userAddForm"]["userName"].value;
+            var password = document.forms["userAddForm"]["password"].value;
+            var role = document.forms["userAddForm"]["role"].value;
+            var longitude = document.forms["userAddForm"]["longitude"].value;
+            var latitude = document.forms["userAddForm"]["latitude"].value;
+
+            if (name.length < 2) {
+                document.getElementById("title").value = "Name not valid!";
+                document.getElementById("title").style.color = "red";
+                mistake = false;
+            }
+            if (userName.length < 2) {
+                document.getElementById("userName").value = "Username not valid!";
+                document.getElementById("userName").style.color = "red";
+                mistake = false;
+            }
+            if (surname.length < 2) {
+                document.getElementById("surname").value = "Surname not valid!";
+                document.getElementById("surname").style.color = "red";
+                mistake = false;
+            }
+            if (password.length < 2) {
+                document.getElementById("password").value = "Password not valid!";
+                document.getElementById("password").style.color = "red";
+                mistake = false;
+            }
+
+            if (isNaN(longitude) || longitude == "") {
+                document.getElementById("longitude").value = "Longitude must be number!";
+                document.getElementById("longitude").style.color = "red";
+                mistake = false;
+            }
+            if (isNaN(latitude) || latitude == "") {
+                document.getElementById("latitude").value = "Latitude must be number!";
+                document.getElementById("latitude").style.color = "red";
+                mistake = false;
+            }
+            if(validateEmail(email) == false){
+                document.getElementById("email").value = "Email not valid!";
+                document.getElementById("email").style.color = "red";
+                mistake = false;
+            }
+
+            return mistake;
+        }
+
+        function clearInput(elementChange){
+            document.getElementById(elementChange).value = "";
+            document.getElementById(elementChange).style.color = "black";
+        }
+    </script>
+
 </head>
 <body>
 
@@ -70,40 +134,48 @@
                     <div class="col-md-2 col-lg-2"></div>
                     <!--<div class="col-md-6 col-lg-6">-->
                     <div class="col-md-8">
-                        <form class="form-group" action="/users/userAddNew" th:action="@{/users/userAddNew}" method="post">
+                        <form class="form-group" name="userAddForm" action="/users/userAddNew" th:action="@{/users/userAddNew}" method="post" onsubmit="return validateForm()">
                             <input th:type="hidden" name="id" th:field="${usrDetails.id}" />
                             <div class="form-group">
                                 <label for="title">Name</label>
-                                <input type="text" class="form-control" id="title" th:field="${usrDetails.name}" />
+                                <input type="text" class="form-control" name="title" id="title" th:field="${usrDetails.name}" onfocus="clearInput('title')" />
                             </div>
                             <div class="form-group">
                                 <label for="surname">Surname</label>
-                                <input class="form-control" id="surname" th:field="${usrDetails.surname}"/>
+                                <input class="form-control" name="surname" id="surname" th:field="${usrDetails.surname}" onfocus="clearInput('surname')"/>
                             </div>
                             <div class="form-group">
                                 <label for="userName">Username</label>
-                                <input class="form-control" id="userName" th:field="${usrDetails.userName}"/>
+                                <input class="form-control" name="userName" id="userName" th:field="${usrDetails.userName}" onfocus="clearInput('userName')"/>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input class="form-control" id="password" th:field="${usrDetails.password}"/>
+                                <input class="form-control" name="password" id="password" th:field="${usrDetails.password}" onfocus="clearInput('password')"/>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input class="form-control" id="email" th:field="${usrDetails.email}"/>
+                                <input class="form-control" name="email" id="email" th:field="${usrDetails.email}" onfocus="clearInput('email')"/>
                             </div>
+                            <!--<div class="form-group">
+                                <label for="role">Role</label>
+                                <input class="form-control" name="role" id="role" th:field="${usrDetails.role}" onfocus="clearInput('role')"/>
+                            </div>-->
+
                             <div class="form-group">
                                 <label for="role">Role</label>
-                                <input class="form-control" id="role" th:field="${usrDetails.role}"/>
+                                <select class="form-control selectpicker" name="role" id="role" th:field="${usrDetails.role}">
+                                    <option th:value="user" selected>user</option>
+                                    <option th:value="supervisor">supervisor</option>
+                                </select>
                             </div>
                             <!--input th:type="hidden" name="id" th:field="${usrDetails.role}" /-->
                             <div class="form-group">
                                 <label for="longitude">Longitude</label>
-                                <input class="form-control" id="longitude" th:field="${usrDetails.longitude}"/>
+                                <input class="form-control" name="longitude" id="longitude" th:field="${usrDetails.longitude}" onfocus="clearInput('longitude')"/>
                             </div>
                             <div class="form-group">
                                 <label for="latitude">Latitude</label>
-                                <input class="form-control" id="latitude" th:field="${usrDetails.latitude}"/>
+                                <input class="form-control" name="latitude" id="latitude" th:field="${usrDetails.latitude}" onfocus="clearInput('latitude')"/>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
                             <button type="button" class="btn btn-default"><a th:href="@{/users/showUsers}">Cancel</a></button>
