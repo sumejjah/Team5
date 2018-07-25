@@ -94,7 +94,7 @@ public class UserController {
                     return "redirect:/users/"+users.get(i).getId().toString()+"/reserve/" + message;
                 }
                 else if (users.get(i).getRole().equals("supervisor")){
-                    return "redirect:/supervisorProfile";
+                    return "redirect:/reservation/all";
                 }
                 else{
                     return "redirect:/admin";

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Travel Activity Tracker</title>
     <script th:src="@{/assets/js/getRoute.js}" type="text/javascript"></script>
-    <script th:src="@{/assets/js/createMap.js}" type="text/javascript"></script>
+    <!--<script th:src="@{/assets/js/createMap.js}" type="text/javascript"></script>-->
     <meta name="description" content="" />
     <meta name="author" content="" />
     <!-- styles -->
@@ -123,12 +123,12 @@
                     var map = new mapboxgl.Map({
                         container: 'map',
                         style: 'mapbox://styles/mapbox/streets-v10',
-                        center: [18.4131,43.8563],
-                        zoom: 15
+                        center: [18.3437274,43.8477649],
+                        zoom: 12
                     });
-                    map.on('load', function() {
-                        getRoute(18.41, 43.85, 18.43, 43.82);
-                    });
+                    var marker= new mapboxgl.Marker();
+                    marker.setLngLat([18.3437274,43.8477649]);
+                    marker.addTo(map);
 
                 </script>
 

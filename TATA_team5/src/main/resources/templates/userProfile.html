@@ -21,7 +21,7 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <script th:src="@{/assets/js/getRoute.js}" type="text/javascript"></script>
-    <script th:src="@{/assets/js/createMap.js}" type="text/javascript"></script>
+    <!--<script th:src="@{/assets/js/createMap.js}" type="text/javascript"></script>-->
     <script>
         function changeHotelId(variable) {
             document.getElementById("hotel_id").value = variable;
@@ -75,8 +75,6 @@
                 <h2>USER DASHBOARD</h2>
             </div>
         </div>
-
-        <hr />
         <div class="row">
             <div class="col-lg-12 ">
                 <div class="alert alert-info">
@@ -86,10 +84,9 @@
             </div>
         </div>
         <!-- /. ROW  -->
-        <hr />
         <div class="container">
             <div class="row" style="position: absolute;">
-                <div class="col-md-12 col-lg-12">
+                <div class="col-*-12">
                     <h4>Route to your desired location</h4>
                     <p>View from google map</p>
                     <!-- map -->

@@ -1,30 +1,43 @@
+
+
 function flyToLocation(long, lat) {
     map.flyTo({
-        center: [long, lat],
-        zoom: 10
+        center: [long, lat]
     });
 
+
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 function getRoute(x,y,p,r) {
 
-    var a=parseFloat(x);
-    var b=parseFloat(y);
-    var c=parseFloat(p);
-    var d=parseFloat(r);
-    var start=[a,b];
-    var end=[c,d];
-    flyToLocation(a,b);
-    var ruta = "route" + Math.floor(Math.random()*100);
+    var a = parseFloat(x);
+    var b = parseFloat(y);
+    var c = parseFloat(p);
+    var d = parseFloat(r);
+
+
+
+    flyToLocation(a, b);
+    var ruta = "route" + Math.floor(Math.random() * 100);
     var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + a + ',' + b + ';' + c + ',' + d + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
     $.ajax({
         method: 'GET',
         url: directionsRequest,
-    }).done(function(data) {
+    }).done(function (data) {
         var route = data.routes[0].geometry;
         map.addLayer({
             id: ruta,
-            type:'line',
+            type: 'line',
+
             source: {
                 type: 'geojson',
                 data: {
@@ -33,22 +46,19 @@ function getRoute(x,y,p,r) {
                 }
             },
             paint: {
-                'line-width': 2
+                'line-width': 2,
+                'line-color':getRandomColor()
             }
         });
-
-        var marker1 = new mapboxgl.Marker();
-        marker1.setLngLat([a, b]);
-        marker1.addTo(map);
-        var marker2 = new mapboxgl.Marker();
-        marker2.setLngLat([c, d]);
-        marker2.addTo(map);
-        var markerList = mapboxgl.Marker();
-        markerList.append(marker1);
-        markerList.append(marker2);
-        map.fitToView(markerList);
-
-// this is where the JavaScript from the next step will go
     });
 
+    var marker1 = new mapboxgl.Marker();
+    marker1.setLngLat([a, b]);
+    marker1.addTo(map);
+    var marker2 = new mapboxgl.Marker();
+    marker2.setLngLat([c, d]);
+    marker2.addTo(map);
+
+    var bbox = [[a,b],[c,d]];
+    map.fitBounds(bbox);
 }
