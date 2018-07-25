@@ -35,56 +35,76 @@
     <!-- /. NAV TOP  -->
 
 
-    <nav class="navbar-default navbar-side" role="navigation" th:replace="adminProfile :: sidebarMenu"></nav>
-    <!-- /. NAV SIDE  -->
+        <nav class="navbar-default navbar-side" role="navigation" th:replace="adminProfile :: sidebarMenu"></nav>
+        <!-- /. NAV SIDE  -->
 
-    <div id="page-wrapper" >
-        <div id="page-inner">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Add new hotel</h2>
+        <nav class="navbar-default navbar-side" role="navigation" th:fragment="sidebarMenu">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a th:href="@{/admin}" ><i class="fa fa-desktop "></i>Home <span class="badge">Included</span></a>
+                    </li>
+                    <li>
+                        <a th:href="@{/hotel/all}"><i class="fa fa-desktop"></i>All hotels</a>
+                    </li>
+                    <li class="active-link">
+                        <a th:href="@{/hotel/addHotel}"><i class="fa fa-plus-circle"></i>Add hotel</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/users/showUsers}"><i class="fa fa-users"></i>All users</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/users/userAdd}"><i class="fa fa-plus-circle"></i>Add user</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="page-wrapper" class="pozadina-hotel">
+            <div id="page-inner" class="pozadina-hotel">
+                <div class="container-add">
+                    <div class="wrap-add">
+                            <div class="col-md-12" style="text-align: center">
+                                <h2>Add new hotel</h2>
+                            </div>
+                        <hr />
+
+                        <!--<div class="row">-->
+                            <div class="col-md-2 col-lg-2"></div>
+                            <!--<div class="col-md-6 col-lg-6">-->
+                            <div class="col-md-8">
+                                <form class="form-group" action="/hotel/addHotelNew" th:action="@{/hotel/addHotelNew}" method="post">
+                                    <input th:type="hidden" name="id" th:field="${hotelDetail.id}" />
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="name" th:field="${hotelDetail.name}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="longitude">Longitude</label>
+                                        <input type="text" class="form-control" id="longitude" th:field="${hotelDetail.longitude}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="latitude">Latitude</label>
+                                        <input type="text" class="form-control" id="latitude" th:field="${hotelDetail.latitude}" />
+                                    </div>
+
+                                    <button class="btn btn-default"><a th:href="@{/hotel/all}">Cancel</a></button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </form>
+                            </div>
+                            <div class="col-md-2 col-lg-2"></div>
+                        <!--</div>-->
+                    </div>
                 </div>
             </div>
-            <!-- /. ROW  -->
-            <hr />
+        </div>
+        <div class="footer">
 
             <div class="row">
-                <div class="col-md-3 col-lg-3"></div>
-                <div class="col-md-6 col-lg-6">
-                    <form class="form-group" action="/hotel/addHotelNew" th:action="@{/hotel/addHotelNew}" method="post">
-                        <input th:type="hidden" name="id" th:field="${hotelDetail.id}" />
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" th:field="${hotelDetail.name}" />
-                        </div>
-                        <div class="form-group">
-                            <label for="longitude">Longitude</label>
-                            <input type="text" class="form-control" id="longitude" th:field="${hotelDetail.longitude}" />
-                        </div>
-                        <div class="form-group">
-                            <label for="latitude">Latitude</label>
-                            <input type="text" class="form-control" id="latitude" th:field="${hotelDetail.latitude}" />
-                        </div>
-
-                        <button class="btn btn-default"><a th:href="@{/hotel/all}">Cancel</a></button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-
-                    </form>
+                <div class="col-lg-12" >
 
                 </div>
-                <div class="col-md-3 col-lg-3"></div>
-            </div>
-
-        </div>
-    </div>
-    <div class="footer">
-
-        <div class="row">
-            <div class="col-lg-12" >
-
             </div>
         </div>
-    </div>
 </div>
 
 <script th:src="@{/assets/js/jquery-1.10.2.js}"></script>

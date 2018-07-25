@@ -15,6 +15,7 @@
 body {
     font-family: 'Open Sans', sans-serif;
     line-height:30px;
+
 }
 
  #wrapper {
@@ -26,8 +27,9 @@ body {
     padding: 15px 15px;
     min-height: 600px;
     background:#F3F3F3;
-   
 }
+
+
 #page-inner {
     width:100%;
     margin:10px 20px 10px 0px;
@@ -175,6 +177,58 @@ min-height: 80px;
     font-weight: 900;
     font-size: 18px;
     width: 250px;
+}
+
+.pozadina-hotel {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BXqCX6b/aerial-view-of-city-buildings-3d-rendering-with-red-point-map-4k-animation-aerial-view-of-city-buildings-3d-rendering-with-red-point-map-4k-animation_rkhn9li4x_thumbnail-full07.png");
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
+.wrap-add {
+    width: 750px;
+    /*background: #fff;*/
+    background: rgba(255,255,255,0.8);
+    /*background: rgba(0,0,0,0.8);*/
+    /*opacity: 0.5;*/
+    border-radius: 10px;
+    overflow: hidden;
+    /*padding: 77px 55px 33px 55px;*/
+    padding: 35px 25px 33px 25px;
+
+
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.container-add{
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /*padding: 200px 55px 200px 200px;*/
+}
+
+.pozadina-user {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BXqCX6b/aerial-view-of-city-buildings-3d-rendering-with-blue-user-icon-map-4k-animation_bmggmr2qel_thumbnail-full10.png");
+    background-repeat:no-repeat;
+    background-size: cover;
 }
 
 
