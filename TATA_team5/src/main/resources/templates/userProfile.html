@@ -25,6 +25,8 @@
     <script>
         function changeHotelId(variable) {
             document.getElementById("hotel_id").value = variable;
+            document.getElementById("book").style.display = "block";
+            document.getElementById("welcomeMsg").innerHTML = 'Book your trip! :)';
         }
     </script>
 
@@ -78,7 +80,7 @@
         <div class="row">
             <div class="col-lg-12 ">
                 <div class="alert alert-info">
-                    <strong style="font-size: 16px"><span th:text="${message}"></span></strong>
+                    <strong style="font-size: 16px"><span th:text="${message}" id="welcomeMsg"></span></strong>
                 </div>
 
             </div>
@@ -102,7 +104,7 @@
                         <div class="form-group" >
                             <input type="text" class="form-control" id="currentUsrId" name="currentUsrId" th:value="${currentUsrId}" th:type="hidden"/>
                         </div>
-                        <button type="submit" class="btn btn-primary pull-right btn-lg">Book</button>
+                        <button type="submit" style="display:none;" id="book" class="btn btn-primary pull-right btn-lg">Book</button>
                     </form>
                 </div>
             </div>
