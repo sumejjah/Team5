@@ -43,8 +43,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><nav>
       <ul class="nav navbar-nav navbar-right">
         <li class="current"><a href="#intro">Home</a></li>
-          <li><a href="#contact">Contact</a></li>
-		<li><a th:href="@{/login}" onclick="return !window.open(this.href,'Log in');">Log in</a></li>
+          <!--<li><a href="#contact">Contact</a></li>-->
+		<li><a th:href="@{/login}">Log in</a></li>
       </ul></nav>
     </div><!-- /.navbar-collapse -->
 	</div>
@@ -72,6 +72,25 @@
 </section>
 <!-- end intro -->
 <!-- Section about -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h1><strong>Hufflepuff</strong></h1>
+            <div class="col-md-4 col-lg-4">
+                <img class="img-thumbnail" alt="Not available!" th:src="@{/assets/img/slide/sumejja.png}">
+                <strong>Sumejja</strong>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <img class="img-thumbnail" alt="Not available!" th:src="@{/assets/img/slide/nedim.png}">
+                <strong>Nedim</strong>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <img class="img-thumbnail" alt="Not available!" th:src="@{/assets/img/slide/jelena.png}">
+                <strong>Jelena</strong>
+            </div>
+    </div>
+
+</div>
 
 <!-- section contact -->
 <div class="container">
