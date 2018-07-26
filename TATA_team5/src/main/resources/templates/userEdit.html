@@ -71,7 +71,14 @@
                             <label for="email">Email</label>
                             <input class="form-control" id="email" th:field="${usrDetails.email}"/>
                         </div>
-                        <input th:type="hidden" name="id" th:field="${usrDetails.role}" />
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select class="form-control selectpicker" name="role" id="role" th:field="${usrDetails.role}">
+                                <option th:value="user" selected>user</option>
+                                <option th:value="supervisor">supervisor</option>
+                            </select>
+                        </div>
+                        <!--<input name="id" th:field="${usrDetails.role}" />-->
                         <div class="form-group">
                             <label for="longitude">Longitude</label>
                             <input class="form-control" id="longitude" th:field="${usrDetails.longitude}"/>

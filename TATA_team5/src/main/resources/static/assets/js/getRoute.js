@@ -60,5 +60,7 @@ function getRoute(x,y,p,r) {
     marker2.addTo(map);
 
     var bbox = [[a,b],[c,d]];
-    map.fitBounds(bbox);
+    map.fitBounds(bbox, {
+        padding: {top: 100, bottom:100, left: 100, right: 100}
+    });
 }
