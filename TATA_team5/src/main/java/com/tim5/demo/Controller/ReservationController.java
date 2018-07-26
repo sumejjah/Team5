@@ -52,6 +52,7 @@ public class ReservationController {
         model.addAttribute("endLongitude",endLongitude);
         model.addAttribute("endLatitude", endLatitude);
         model.addAttribute("reservationNumber", startLatitude.size());
+        model.addAttribute("allReservations", reservations);
 
         return "supervisorProfile";
     }

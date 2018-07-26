@@ -70,6 +70,26 @@ public class UserController {
         return "userAdd";
     }
 
+    //CREATE NEW USER
+    @RequestMapping(path = "/signUp", method = RequestMethod.GET)
+    public String signUp(Model model) {
+        model.addAttribute("usrDetails", new Users());
+
+        return "signUp";
+    }
+
+    //REGISTER NEW USER
+    @RequestMapping(path = "/userSignUp", method = RequestMethod.POST)
+    public String addNewSignUp(Model model, Users user) {
+        model.addAttribute("usrDetails", new Users());
+
+        if(user.getName() != "") {
+            usersRepository.save(new Users(user.getName(), user.getSurname(), user.getUserName(), user.getPassword(), user.getEmail(), "user", user.getLongitude(), user.getLatitude()));
+        }
+
+        return "loginPage";
+    }
+
     @RequestMapping(path = "/{userId}/reserve/{message}", method = RequestMethod.GET)
     public String userPanel(@PathVariable Long userId, @PathVariable String message, Model model) {
         model.addAttribute("currentUsrId", userId);
