@@ -1,4 +1,13 @@
 
+
+function flyToLocation(long, lat) {
+    map.flyTo({
+        center: [long, lat]
+    });
+
+
+}
+
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -15,6 +24,9 @@ function getRoute(x,y,p,r) {
     var c = parseFloat(p);
     var d = parseFloat(r);
 
+
+
+    flyToLocation(a, b);
     var ruta = "route" + Math.floor(Math.random() * 100);
     var directionsRequest = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + a + ',' + b + ';' + c + ',' + d + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
     $.ajax({
@@ -34,7 +46,7 @@ function getRoute(x,y,p,r) {
                 }
             },
             paint: {
-                'line-width': 5,
+                'line-width': 2,
                 'line-color':getRandomColor()
             }
         });
